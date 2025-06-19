@@ -54,6 +54,20 @@ class ListaTest {
     }
 
     @Test
+    void testEliminarDuplicados() {
+        lista.insertarOrdenado("7", 7);
+        lista.insertarOrdenado("7", 7);
+        lista.insertarOrdenado("8", 8);
+        lista.insertarOrdenado("10", 10);
+        lista.insertarOrdenado("10", 10);
+        lista.insertarOrdenado("10", 10);
+
+        lista.eliminarDuplicados();
+
+        assertEquals("7,8,10", lista.imprimir());
+    }
+
+    @Test
     void testesVaciaYCantElementos() {
         assertTrue(lista.esVacia());
         assertEquals(0, lista.cantElementos());
