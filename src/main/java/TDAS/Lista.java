@@ -34,6 +34,26 @@ public class Lista<T> implements ILista<T> {
         }
     }
 
+    public void insertarOrdenado(T dato, Comparable clave) {
+        Nodo<T> unElemento = new Nodo<T>(clave, dato);
+        //Si clave < etiqueta = -1
+        if (esVacia() || clave.compareTo(primero.etiqueta) < 0) {
+            unElemento.siguiente = primero;
+            primero = unElemento;
+            return;
+        }
+
+        Nodo<T> actual = primero;
+        //Mientras clave > etiqeuta = 1
+        while (actual.siguiente != null && clave.compareTo(actual.siguiente.etiqueta) > 0) {
+            actual = actual.siguiente;
+        }
+
+        //Inseretamos el nodo donde corresponde
+        unElemento.siguiente = actual.siguiente;
+        actual.siguiente = unElemento;
+    }
+
     @Override
     public T buscar(Comparable clave) {
         if (esVacia()) {
