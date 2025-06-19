@@ -28,6 +28,19 @@ class ListaTest {
     }
 
     @Test
+    void testInsertarOrdenado() {
+        lista.insertarOrdenado("7", 7);
+        lista.insertarOrdenado("6", 6);
+        lista.insertarOrdenado("8", 8);
+        lista.insertarOrdenado("10", 10);
+        lista.insertarOrdenado("9", 9);
+
+        assertEquals("6,7,8,9,10", lista.imprimir());
+
+    }
+
+
+    @Test
     void testEliminar() {
         lista.insertar("A", "a");
         lista.insertar("B", "b");
@@ -38,6 +51,20 @@ class ListaTest {
         assertTrue(lista.eliminar("a"));   // eliminar el primero
         assertTrue(lista.eliminar("c"));   // eliminar el último
         assertFalse(lista.eliminar("c"));  // ya fue eliminado
+    }
+
+    @Test
+    void testEliminarDuplicados() {
+        lista.insertarOrdenado("7", 7);
+        lista.insertarOrdenado("7", 7);
+        lista.insertarOrdenado("8", 8);
+        lista.insertarOrdenado("10", 10);
+        lista.insertarOrdenado("10", 10);
+        lista.insertarOrdenado("10", 10);
+
+        lista.eliminarDuplicados();
+
+        assertEquals("7,8,10", lista.imprimir());
     }
 
     @Test

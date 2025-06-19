@@ -34,6 +34,27 @@ public class Lista<T> implements ILista<T> {
         }
     }
 
+    //O(n)
+    public void insertarOrdenado(T dato, Comparable clave) {
+        Nodo<T> unElemento = new Nodo<T>(clave, dato);
+        //Si clave < etiqueta = -1
+        if (esVacia() || clave.compareTo(primero.etiqueta) < 0) {
+            unElemento.siguiente = primero;
+            primero = unElemento;
+            return;
+        }
+
+        Nodo<T> actual = primero;
+        //Mientras clave > etiqeuta = 1
+        while (actual.siguiente != null && clave.compareTo(actual.siguiente.etiqueta) > 0) {
+            actual = actual.siguiente;
+        }
+
+        //Inseretamos el nodo donde corresponde
+        unElemento.siguiente = actual.siguiente;
+        actual.siguiente = unElemento;
+    }
+
     @Override
     public T buscar(Comparable clave) {
         if (esVacia()) {
@@ -69,6 +90,22 @@ public class Lista<T> implements ILista<T> {
         }
         actual.siguiente = actual.siguiente.siguiente;
         return true;
+    }
+
+    //O(n2)
+    public void eliminarDuplicados() {
+        Nodo<T> actual = primero;
+        while (actual != null) {
+            Nodo<T> buscarDuplicados = actual;
+            while (buscarDuplicados.siguiente != null) {
+               if (buscarDuplicados.siguiente.etiqueta.equals(actual.etiqueta)) {
+                   buscarDuplicados.siguiente = buscarDuplicados.siguiente.siguiente;
+               } else {
+                   buscarDuplicados = buscarDuplicados.siguiente;
+               }
+            }
+            actual = actual.siguiente;
+        }
     }
 
     @Override
