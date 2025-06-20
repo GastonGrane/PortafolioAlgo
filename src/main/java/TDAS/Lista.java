@@ -55,6 +55,39 @@ public class Lista<T> implements ILista<T> {
         actual.siguiente = unElemento;
     }
 
+    public Lista<Integer> ordenarParImpar(){
+        Lista<Integer> listaPares = new Lista<Integer>();
+        Lista<Integer> listaImpares = new Lista<Integer>();
+
+        Nodo<Integer> actual = (Nodo<Integer>) this.primero;
+
+        while (actual != null) {
+            Integer valor = actual.dato;
+
+            if (valor % 2 == 0) {
+                listaPares.insertarOrdenado(actual.dato, actual.etiqueta);
+            } else {
+                listaImpares.insertarOrdenado(actual.dato, actual.etiqueta);
+            }
+            actual = actual.siguiente;
+        }
+        Lista<T> resultado = new Lista<>();
+
+        Nodo<T> impar = (Nodo<T>) listaImpares.primero;
+        while (impar != null){
+            resultado.insertar(impar.dato,  impar.etiqueta);
+            impar = impar.siguiente;
+        }
+
+        Nodo<T> par = (Nodo<T>) listaPares.primero;
+        while (par != null){
+            resultado.insertar(par.dato,  par.etiqueta);
+            par = par.siguiente;
+        }
+
+        return (Lista<Integer>) resultado;
+    }
+
     @Override
     public T buscar(Comparable clave) {
         if (esVacia()) {
