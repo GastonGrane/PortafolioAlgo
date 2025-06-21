@@ -88,6 +88,33 @@ public class Lista<T> implements ILista<T> {
         return (Lista<Integer>) resultado;
     }
 
+    public Lista<T> mezclarCon(Lista<T> lista){
+        Lista<T> resultado = new Lista<T>();
+
+        Nodo<T> actual = (Nodo<T>) this.primero;
+        while (actual != null){
+            resultado.insertarOrdenado(actual.dato, actual.etiqueta);
+            actual = actual.siguiente;
+        }
+
+        actual = (Nodo<T>) lista.primero;
+        while (actual != null){
+            resultado.insertarOrdenado(actual.dato, actual.etiqueta);
+            actual = actual.siguiente;
+        }
+
+        //Dejamos vacias la listas que se nos proporcioan
+        this.vaciar();
+        lista.vaciar();
+
+        return (Lista<T>) resultado;
+    }
+
+    //Metodo para vaciar las listas utilziadas
+    public void vaciar() {
+        primero = null;
+    }
+
     @Override
     public T buscar(Comparable clave) {
         if (esVacia()) {
