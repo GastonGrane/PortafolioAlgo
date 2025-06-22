@@ -104,14 +104,14 @@ public class Lista<T> implements ILista<T> {
         }
 
         //Dejamos vacias la listas que se nos proporcioan
-        this.vaciar();
-        lista.vaciar();
+        this.esVacio();
+        lista.esVacio();
 
         return (Lista<T>) resultado;
     }
 
-    //Metodo para vaciar las listas utilziadas
-    public void vaciar() {
+    //Metodo para esVacio las listas utilziadas
+    public void esVacio() {
         primero = null;
     }
 

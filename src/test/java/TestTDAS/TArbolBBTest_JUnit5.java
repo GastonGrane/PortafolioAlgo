@@ -20,21 +20,21 @@ class TArbolBBTest_JUnit5 {
     @Test
     void dadoArbolVacio_cuandoInsertarEntoncesArbolNoVacio() {
         // Dado
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
 
         // Cuando
         boolean resultado = arbol.insertar(10, 10);
 
         // Entonces
         assertTrue(resultado);
-        assertFalse(arbol.esVacio());
+        assertFalse(arbol.vaciar());
     }
 
     @Test
     void dadoArbolConElementos_cuandoInsertarElementoExistenteEntoncesFalso() {
         // Dado
         arbol.insertar(10, 10);
-        assertFalse(arbol.esVacio());
+        assertFalse(arbol.vaciar());
 
         // Cuando
         boolean resultado = arbol.insertar(10, 10);
@@ -46,7 +46,7 @@ class TArbolBBTest_JUnit5 {
     @Test
     void dadoArbolVacio_cuandoBuscarEntoncesNull() {
         // Dado
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
 
         // Cuando
         Integer resultado = arbol.buscar(10);
@@ -81,35 +81,35 @@ class TArbolBBTest_JUnit5 {
     }
 
     @Test
-    void dadoArbolVacio_cuandoVaciarEntoncesFalso() {
+    void dadoArbolVacio_cuandoEsVacioEntoncesFalso() {
         // Dado
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
 
         // Cuando
-        boolean resultado = arbol.vaciar();
+        boolean resultado = arbol.esVacio();
 
         // Entonces
         assertFalse(resultado);
     }
 
     @Test
-    void dadoArbolConElementos_cuandoVaciarEntoncesVerdadero() {
+    void dadoArbolConElementos_cuandoEsVacioEntoncesVerdadero() {
         // Dado
         arbol.insertar(10, 10);
-        assertFalse(arbol.esVacio());
+        assertFalse(arbol.vaciar());
 
         // Cuando
-        boolean resultado = arbol.vaciar();
+        boolean resultado = arbol.esVacio();
 
         // Entonces
         assertTrue(resultado);
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
     }
 
     @Test
     void dadoArbolVacio_cuandoInOrdenEntoncesListaVacia() {
         // Dado
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
 
         // Cuando
         List<Integer> resultado = arbol.inOrden();
@@ -151,7 +151,7 @@ class TArbolBBTest_JUnit5 {
     @Test
     void dadoArbolVacio_cuandoPreOrdenEntoncesListaVacia() {
         // Dado
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
 
         // Cuando
         List<Integer> resultado = arbol.preOrden();
@@ -178,7 +178,7 @@ class TArbolBBTest_JUnit5 {
         @Test
     void dadoArbolVacio_cuandoPostOrdenEntoncesListaVacia() {
         // Dado
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
 
         // Cuando
         List<Integer> resultado = arbol.postOrden();
@@ -190,26 +190,26 @@ class TArbolBBTest_JUnit5 {
     @Test
     void dadoArbolVacio_cuandoEliminarEntoncesNoCambios() {
         // Dado
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
 
         // Cuando
         arbol.eliminar(10);
 
         // Entonces
-        assertTrue(arbol.esVacio());
+        assertTrue(arbol.vaciar());
     }
 
     @Test
     void dadoArbolConElementos_cuandoEliminarElementoNoExistenteEntoncesArbolInalterado() {
         // Dado
         arbol.insertar(10, 10);
-        assertFalse(arbol.esVacio());
+        assertFalse(arbol.vaciar());
 
         // Cuando
         arbol.eliminar(20);
 
         // Entonces
-        assertFalse(arbol.esVacio());
+        assertFalse(arbol.vaciar());
         assertNotNull(arbol.buscar(10));
     }
 
@@ -219,7 +219,7 @@ class TArbolBBTest_JUnit5 {
         arbol.insertar(10, 10);
         arbol.insertar(20, 20);
         arbol.insertar(30, 30);
-        assertFalse(arbol.esVacio());
+        assertFalse(arbol.vaciar());
 
         // Cuando
         arbol.eliminar(20);
