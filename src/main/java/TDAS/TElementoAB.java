@@ -361,4 +361,77 @@ public class TElementoAB<T> implements IElementoAB<T> {
         return cantidad;
     }
 
+    public Comparable obtenerMenorClave(){
+        Comparable claveMenor = this.etiqueta;
+        if(hijoIzq != null){
+            claveMenor = hijoIzq.obtenerMenorClave();
+        }
+        return claveMenor;
+    }
+
+    public Comparable obtenerMayorClave(){
+        Comparable claveMayor = this.etiqueta;
+        if(hijoDer != null){
+            claveMayor = hijoDer.obtenerMayorClave();
+        }
+        return claveMayor;
+    }
+
+    public Comparable obtenerInmediatoAnterior(Comparable unaClave){
+        LinkedList<Comparable> lista = new LinkedList<>();
+        this.inOrden((LinkedList<T>) lista);
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).compareTo(unaClave) == 0) {
+                return (i > 0) ? lista.get(i - 1) : null;
+            }
+        }
+        return null; // si no lo encuentra
+    }
+
+    public String listarHojasConNiveles(int nivelDelNodo){
+        StringBuilder lista = new StringBuilder("");
+        boolean esHoja = true;
+        if(hijoIzq != null){
+            lista.append(hijoIzq.listarHojasConNiveles(nivelDelNodo+1));
+            esHoja = false;
+        }
+        if(hijoDer != null){
+            if (lista.equals("")){
+                lista.append(hijoDer.listarHojasConNiveles(nivelDelNodo+1));
+            }else{
+                lista.append("\n"+hijoDer.listarHojasConNiveles(nivelDelNodo+1));
+            }
+            esHoja = false;
+        }
+        if(esHoja){
+            return etiqueta.toString() + " Nivel: " + nivelDelNodo;
+        }else{
+            return lista.toString();
+        }
+    }
+
+    public boolean esDeBusqueda(){
+        boolean esBusqueda = true;
+        if(hijoIzq != null){
+            if(hijoIzq.getEtiqueta().compareTo(etiqueta) < 0){
+                esBusqueda = hijoIzq.esDeBusqueda();
+                if(!esBusqueda){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }if(hijoDer != null){
+            if(hijoDer.getEtiqueta().compareTo(etiqueta) > 0){
+                esBusqueda = hijoDer.esDeBusqueda();
+                if(!esBusqueda){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+        return esBusqueda;
+    }
 }

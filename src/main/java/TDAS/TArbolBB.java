@@ -128,4 +128,24 @@ public class TArbolBB<T> implements IArbolBB<T> {
         return (nodoRaiz != null) ? nodoRaiz.enNivel(nivel) : 0;
     }
 
+    public Comparable obtenerMenorClave() {
+        return (nodoRaiz != null) ? nodoRaiz.obtenerMenorClave() : null;
+    }
+
+    public Comparable obtenerMayorClave() {
+        return (nodoRaiz != null) ? nodoRaiz.obtenerMayorClave() : null;
+    }
+
+    public Comparable obtenerInmediatoAnterior(Comparable clave) {
+        return (nodoRaiz != null) ? nodoRaiz.obtenerInmediatoAnterior(clave) : null;
+    }
+
+    public String listarHojasConNiveles() {
+        return (nodoRaiz != null) ? nodoRaiz.listarHojasConNiveles(0) : "";
+    }
+
+    public boolean esABB() {
+        return (nodoRaiz != null) ? nodoRaiz.esDeBusqueda() : true;
+    }
+
 }
