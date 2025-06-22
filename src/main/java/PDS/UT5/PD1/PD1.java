@@ -1,4 +1,4 @@
-package PDS.UT5;
+package PDS.UT5.PD1;
 
 import TDAS.TArbolGenerico;
 
