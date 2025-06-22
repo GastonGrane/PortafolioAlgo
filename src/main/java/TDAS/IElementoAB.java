@@ -103,4 +103,14 @@ public interface IElementoAB<T> {
      * @return Tamaño del árbol.
      */
     public int obtenerTamaño();
+
+    int contarInternos();
+
+    int enNivel(int i);
+
+    int completos();
+
+    int altura();
+
+    int contarHojas();
 }

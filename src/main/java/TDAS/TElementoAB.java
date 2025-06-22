@@ -159,6 +159,8 @@ public class TElementoAB<T> implements IElementoAB<T> {
         }
         return nodo;
     }
+
+    //TD1
     @Override
     public int obtenerTamaño() {
         int size = 1; // Contamos el nodo actual
@@ -215,6 +217,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
         return -1; // clave no encontrada
     }
 
+    //TD1
     public int contarHojas(){
         if (hijoIzq == null && hijoDer == null) return 1;
         int izq = (hijoIzq != null) ? ((TElementoAB<T>) hijoIzq).contarHojas() : 0;
@@ -232,6 +235,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
         return suma;
     }
 
+    //TD1
     public void imprimirNivel(int nivel) {
         if (nivel == 0) {
             System.out.println(etiqueta);
@@ -240,7 +244,24 @@ public class TElementoAB<T> implements IElementoAB<T> {
             if (hijoDer != null) ((TElementoAB<T>) hijoDer).imprimirNivel(nivel - 1);
         }
     }
-/* 
+
+    //TD1
+    public int enNivel(int nivel) {
+        if (nivel == 0) {
+            return 1;
+        } else {
+            int cantidad = 0;
+            if (hijoIzq != null) {
+                cantidad += hijoIzq.enNivel(nivel - 1);
+            }
+            if (hijoDer != null) {
+                cantidad += hijoDer.enNivel(nivel - 1);
+            }
+            return cantidad;
+        }
+    }
+
+    /*
     public void recorrerPorNiveles() {
         Cola<TElementoAB<T>> cola = new Cola<>();
         cola.poneEnCola(this);
@@ -285,13 +306,59 @@ public class TElementoAB<T> implements IElementoAB<T> {
     
     //DFS = recorrer el árbol yendo por las ramas hasta el fondo antes de volver
     public void dfs(LinkedList<Comparable> recorrido) {
-    recorrido.add(this.etiqueta);
-    if (hijoIzq != null) {
-        ((TElementoAB<T>) hijoIzq).dfs(recorrido);
+        recorrido.add(this.etiqueta);
+        if (hijoIzq != null) {
+            ((TElementoAB<T>) hijoIzq).dfs(recorrido);
+        }
+        if (hijoDer != null) {
+            ((TElementoAB<T>) hijoDer).dfs(recorrido);
+        }
     }
-    if (hijoDer != null) {
-        ((TElementoAB<T>) hijoDer).dfs(recorrido);
+
+    //TD1
+    public int altura(){
+
+        int alturaIzq = (this.hijoIzq != null) ? ((TElementoAB<T>)hijoIzq).altura() : -1;
+        int alturaDer = (this.hijoDer != null) ? ((TElementoAB<T>)hijoDer).altura() : -1;
+
+        return 1 + Math.max(alturaIzq, alturaDer);
     }
+
+    //TD1
+    public int contarInternos() {
+        int internos = 0;
+        if (this.hijoIzq == null && this.hijoDer == null) {
+            return internos += 0;
+        }
+
+        internos += 1;
+        if (this.hijoIzq != null) {
+            internos += this.hijoIzq.contarInternos();
+        }
+        if (this.hijoDer != null) {
+            internos += this.hijoDer.contarInternos();
+        }
+
+        return internos;
+    }
+
+    //TD1
+    public int completos() {
+        int cantidad = 0;
+
+        if (hijoIzq != null && hijoDer != null) {
+            cantidad = 1;
+        }
+
+        if (hijoIzq != null) {
+            cantidad += hijoIzq.completos();
+        }
+
+        if (hijoDer != null) {
+            cantidad += hijoDer.completos();
+        }
+
+        return cantidad;
     }
 
 }

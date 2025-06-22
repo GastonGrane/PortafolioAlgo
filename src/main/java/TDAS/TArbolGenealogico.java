@@ -18,7 +18,7 @@ public class TArbolGenealogico<T> extends TArbolBB<T> {
         TElementoGen<T> nuevoElemento = new TElementoGen<>(etiqueta, unDato);
 
         // Verifico si el árbol está vacío. Si es así, creo un nuevo nodo raíz.
-        if (esVacio()){
+        if (vaciar()){
             nodoRaiz = (TElementoGen<Personas>) nuevoElemento;
             return true;
         } else {
@@ -29,7 +29,7 @@ public class TArbolGenealogico<T> extends TArbolBB<T> {
 
     @Override
     public T buscar(Comparable unaEtiqueta) {
-        if (esVacio()) {
+        if (vaciar()) {
             return null;
         } else {
             IElementoAB<T> nodo = (IElementoAB<T>) nodoRaiz.buscar(unaEtiqueta);
@@ -86,12 +86,12 @@ public class TArbolGenealogico<T> extends TArbolBB<T> {
     }
 
     @Override
-    public boolean esVacio() {
+    public boolean vaciar() {
         return nodoRaiz == null;
     }
 
     @Override
-    public boolean vaciar() {
+    public boolean esVacio() {
         if (nodoRaiz == null){
             return false;
         }else {

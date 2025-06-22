@@ -52,14 +52,13 @@ public interface IArbolBB<T> {
     public List<T> postOrden();
 
     /**
+     * Vacia el árbol.
+     */
+    public boolean vaciar();
+
+    /**
      * Retorna si el árbol es vacío.
      * @return Verdadero si el árbol es vacío, falso en caso contrario.
      */
     public boolean esVacio();
-
-    /**
-     * Vacia el árbol.
-     * @return Verdadero si el árbol fue vaciado, falso en caso contrario.
-     */
-    public boolean vaciar();
 }

@@ -16,7 +16,7 @@ public class TArbolBB<T> implements IArbolBB<T> {
     public boolean insertar(Comparable etiqueta, T unDato) {
         IElementoAB<T> nuevoElemento = new TElementoAB<>(etiqueta, unDato);
         // Verifico si el árbol está vacío. Si es así, creo un nuevo nodo raíz.
-        if (esVacio()){
+        if (vaciar()){
             nodoRaiz = nuevoElemento;
             return true;
         } else {
@@ -27,7 +27,7 @@ public class TArbolBB<T> implements IArbolBB<T> {
 
     @Override
     public T buscar(Comparable unaEtiqueta) {
-        if (esVacio()) {
+        if (vaciar()) {
             return null;
         } else {
             IElementoAB<T> nodo = nodoRaiz.buscar(unaEtiqueta);
@@ -84,12 +84,12 @@ public class TArbolBB<T> implements IArbolBB<T> {
     }
 
     @Override
-    public boolean esVacio() {
+    public boolean vaciar() {
         return nodoRaiz == null;
     }
 
     @Override
-    public boolean vaciar() {
+    public boolean esVacio() {
         if (nodoRaiz == null){
             return false;
         }else {
@@ -104,5 +104,28 @@ public class TArbolBB<T> implements IArbolBB<T> {
         }
         return nodoRaiz.obtenerTamaño(); // Llama al método en la raíz
     }
-   
+
+    public int alturaArbol() {
+        if (nodoRaiz != null) {
+            return nodoRaiz.altura();
+        }
+        return -1; // si el árbol está vacío
+    }
+
+    public int hojasArbol() {
+        return (nodoRaiz != null) ? nodoRaiz.contarHojas() : 0;
+    }
+
+    public int internosArbol() {
+        return (nodoRaiz != null) ? nodoRaiz.contarInternos() : 0;
+    }
+
+    public int completosArbol() {
+        return (nodoRaiz != null) ? nodoRaiz.completos() : 0;
+    }
+
+    public int enNiveldelArbol(int nivel) {
+        return (nodoRaiz != null) ? nodoRaiz.enNivel(nivel) : 0;
+    }
+
 }
