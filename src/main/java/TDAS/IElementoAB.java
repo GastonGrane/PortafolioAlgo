@@ -113,4 +113,14 @@ public interface IElementoAB<T> {
     int altura();
 
     int contarHojas();
+
+    Comparable obtenerMenorClave();
+
+    Comparable obtenerMayorClave();
+
+    String listarHojasConNiveles(int i);
+
+    boolean esDeBusqueda();
+
+    Comparable obtenerInmediatoAnterior(Comparable clave);
 }
