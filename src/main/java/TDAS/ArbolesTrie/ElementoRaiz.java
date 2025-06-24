@@ -1,4 +1,4 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
 /**
  * Representa el nodo raíz de un árbol binario.

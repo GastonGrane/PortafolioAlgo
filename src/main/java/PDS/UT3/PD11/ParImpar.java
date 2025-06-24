@@ -1,6 +1,6 @@
 package PDS.UT3.PD11;
 
-import TDAS.Lista;
+import TDAS.UT3.Lista;
 
 public class ParImpar {
     public static void main(String[] args) {

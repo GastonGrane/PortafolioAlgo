@@ -1,13 +1,10 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
-public interface IArbolGenerico {
+public interface INodoArbolGenerico {
 
     public boolean insertar(Comparable etiqueta, Comparable etiquetaPadre);
 
     public TNodoArbolGenerico buscar(Comparable etiqueta);
 
-    public String listarIdentado();
-
-    public boolean esVacio();
-
+    public String listarIdentado(int nivel);
 }

@@ -1,6 +1,6 @@
 package TestTDAS;
 
-import TDAS.Lista;
+import TDAS.UT3.Lista;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

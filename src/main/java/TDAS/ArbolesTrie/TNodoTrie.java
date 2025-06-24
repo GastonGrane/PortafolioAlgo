@@ -1,6 +1,4 @@
-package TDAS;
-
-import TDAS.INodoTrie;
+package TDAS.ArbolesTrie;
 
 import java.util.LinkedList;
 

@@ -1,4 +1,4 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
 public class TArbolAVL<T> extends TArbolBB<T> {
     public TArbolAVL() {

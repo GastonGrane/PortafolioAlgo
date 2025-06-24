@@ -1,4 +1,4 @@
-package TDAS;
+package TDAS.UT3;
 
 public class Lista<T> implements ILista<T> {
 

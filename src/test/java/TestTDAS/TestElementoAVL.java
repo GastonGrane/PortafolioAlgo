@@ -1,6 +1,6 @@
 package TestTDAS;
 
-import TDAS.TArbolAVL;
+import TDAS.ArbolesTrie.TArbolAVL;
 import org.junit.Test;
 
 import java.util.List;
