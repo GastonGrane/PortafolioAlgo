@@ -1,4 +1,4 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
 public class Personas {
 }

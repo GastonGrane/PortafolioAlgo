@@ -1,6 +1,6 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
-public class TArbolGenerico implements IArbolGenerico{
+public class TArbolGenerico implements IArbolGenerico {
 
     public TNodoArbolGenerico raiz;
 

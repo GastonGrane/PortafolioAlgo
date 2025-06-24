@@ -1,6 +1,6 @@
 package TestTDAS;
 
-import TDAS.TArbolBB;
+import TDAS.ArbolesTrie.TArbolBB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

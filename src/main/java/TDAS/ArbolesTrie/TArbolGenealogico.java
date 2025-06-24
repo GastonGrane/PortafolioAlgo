@@ -1,27 +1,29 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class TArbolBB<T> implements IArbolBB<T> {
-    protected IElementoAB<T> nodoRaiz;
+
+public class TArbolGenealogico<T> extends TArbolBB<T> {
+    protected TElementoGen<Personas> nodoRaiz;
     private IArbolBB<T> subArbolIzquierdo;
     private IArbolBB<T> subArbolDerecho;
 
-    public TArbolBB() {
+    public TArbolGenealogico() {
         this.nodoRaiz = null;
     }
 
     @Override
     public boolean insertar(Comparable etiqueta, T unDato) {
-        IElementoAB<T> nuevoElemento = new TElementoAB<>(etiqueta, unDato);
+        TElementoGen<T> nuevoElemento = new TElementoGen<>(etiqueta, unDato);
+
         // Verifico si el árbol está vacío. Si es así, creo un nuevo nodo raíz.
         if (vaciar()){
-            nodoRaiz = nuevoElemento;
+            nodoRaiz = (TElementoGen<Personas>) nuevoElemento;
             return true;
         } else {
             // Si no está vacío, llamo al método insertar de la clase ElementoAB.
-            return nodoRaiz.insertar(nuevoElemento);
+            return nodoRaiz.insertar((IElementoAB<Personas>) nuevoElemento);
         }
     }
 
@@ -30,7 +32,7 @@ public class TArbolBB<T> implements IArbolBB<T> {
         if (vaciar()) {
             return null;
         } else {
-            IElementoAB<T> nodo = nodoRaiz.buscar(unaEtiqueta);
+            IElementoAB<T> nodo = (IElementoAB<T>) nodoRaiz.buscar(unaEtiqueta);
             if (nodo != null) {
                 return nodo.getDatos(); // Obtén el dato almacenado en el nodo
             } else {
@@ -44,7 +46,7 @@ public class TArbolBB<T> implements IArbolBB<T> {
     @Override
     public void eliminar(Comparable unaEtiqueta) {
         if (nodoRaiz != null){
-            nodoRaiz = nodoRaiz.eliminar(unaEtiqueta);
+            nodoRaiz = (TElementoGen<Personas>) nodoRaiz.eliminar(unaEtiqueta);
         } else {
             System.out.println("El árbol está vacío. No se puede eliminar el elemento.");
         }
@@ -105,47 +107,13 @@ public class TArbolBB<T> implements IArbolBB<T> {
         return nodoRaiz.obtenerTamaño(); // Llama al método en la raíz
     }
 
-    public int alturaArbol() {
-        if (nodoRaiz != null) {
-            return nodoRaiz.altura();
+    public void mostrarParentesco(Personas persona1, Personas persona2) {
+        if (nodoRaiz == null) {
+            System.out.println("El árbol está vacío");
+            return;
         }
-        return -1; // si el árbol está vacío
-    }
 
-    public int hojasArbol() {
-        return (nodoRaiz != null) ? nodoRaiz.contarHojas() : 0;
-    }
-
-    public int internosArbol() {
-        return (nodoRaiz != null) ? nodoRaiz.contarInternos() : 0;
-    }
-
-    public int completosArbol() {
-        return (nodoRaiz != null) ? nodoRaiz.completos() : 0;
-    }
-
-    public int enNiveldelArbol(int nivel) {
-        return (nodoRaiz != null) ? nodoRaiz.enNivel(nivel) : 0;
-    }
-
-    public Comparable obtenerMenorClave() {
-        return (nodoRaiz != null) ? nodoRaiz.obtenerMenorClave() : null;
-    }
-
-    public Comparable obtenerMayorClave() {
-        return (nodoRaiz != null) ? nodoRaiz.obtenerMayorClave() : null;
-    }
-
-    public Comparable obtenerInmediatoAnterior(Comparable clave) {
-        return (nodoRaiz != null) ? nodoRaiz.obtenerInmediatoAnterior(clave) : null;
-    }
-
-    public String listarHojasConNiveles() {
-        return (nodoRaiz != null) ? nodoRaiz.listarHojasConNiveles(0) : "";
-    }
-
-    public boolean esABB() {
-        return (nodoRaiz != null) ? nodoRaiz.esDeBusqueda() : true;
+        nodoRaiz.Parientes(nodoRaiz, persona1, persona2);
     }
 
 }

@@ -1,4 +1,4 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package PDS.UT5.PD1;
 
-import TDAS.TArbolGenerico;
+import TDAS.ArbolesTrie.TArbolGenerico;
 
 public class PD1 {
     public static void main(String[] args) {

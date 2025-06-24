@@ -1,4 +1,4 @@
-package TDAS;
+package TDAS.UT3;
 
 public interface IConjunto<T, K extends Comparable<K>> {
     void agregar(T elemento, K clave);

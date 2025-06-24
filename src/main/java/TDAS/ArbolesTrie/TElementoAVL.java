@@ -1,4 +1,4 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
 public class TElementoAVL<T> extends TElementoAB<T> {
     protected int altura; // Altura del nodo en el árbol AVL // se cambia a protected para que sea accesible desde la clase TArbolAVL

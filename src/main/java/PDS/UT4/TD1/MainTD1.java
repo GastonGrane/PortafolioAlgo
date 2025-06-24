@@ -1,7 +1,6 @@
 package PDS.UT4.TD1;
 
-import TDAS.TArbolBB;
-import TDAS.TElementoAB;
+import TDAS.ArbolesTrie.TArbolBB;
 
 public class MainTD1 {
     public static void main(String[] args) {

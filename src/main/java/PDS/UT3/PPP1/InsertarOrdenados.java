@@ -1,6 +1,6 @@
 package PDS.UT3.PPP1;
 
-import TDAS.Lista;
+import TDAS.UT3.Lista;
 
 public class InsertarOrdenados {
     public static void main(String[] args) {

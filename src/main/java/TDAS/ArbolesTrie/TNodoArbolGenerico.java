@@ -1,6 +1,6 @@
-package TDAS;
+package TDAS.ArbolesTrie;
 
-public class TNodoArbolGenerico implements INodoArbolGenerico{
+public class TNodoArbolGenerico implements INodoArbolGenerico {
 
     private Comparable etiqueta;
     private TNodoArbolGenerico hijo;
