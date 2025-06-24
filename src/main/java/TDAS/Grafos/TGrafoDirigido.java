@@ -1,7 +1,7 @@
 package TDAS.Grafos;
 
+import static TDAS.Grafos.UtilGrafos.obtenerMatrizCostos;
 import static java.lang.Math.min;
-import static uy.edu.ucu.aed.tdas.UtilGrafos.obtenerMatrizCostos;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +16,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     private Map<Comparable, IVertice> vertices; // vertices del grafo.-
 
-    public TGrafoDirigido(Collection<IVertice> vertices, Collection<IArista> aristas) {
+    public TGrafoDirigido(Collection<TVertice> vertices, Collection<TArista> aristas) {
         this.vertices = new HashMap<>();
         for (IVertice vertice : vertices) {
             insertarVertice(vertice.getEtiqueta());

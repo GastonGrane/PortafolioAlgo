@@ -1,5 +1,7 @@
 package TDAS.Grafos;
 
+import Utils.ManejadorArchivosGenerico;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,8 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import uy.edu.ucu.aed.utils.ManejadorArchivosGenerico;
 
 public class UtilGrafos {
 
@@ -202,7 +202,7 @@ public class UtilGrafos {
     public static <T extends IGrafoDirigido> T cargarGrafo(String nomArchVert, String nomArchAdy, 
             boolean ignoreHeader, Class t  ) {
 
-        String[] vertices = ManejadorArchivosGenerico.leerArchivo(nomArchVert, ignoreHeader);
+        String[] vertices = ManejadorArchivosGenerico.leerArchivo(nomArchVert);
         String[] aristas = ManejadorArchivosGenerico.leerArchivo(nomArchAdy, ignoreHeader);
 
         List<IVertice> verticesList = new ArrayList<IVertice>(vertices.length);
