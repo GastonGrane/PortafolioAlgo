@@ -30,7 +30,6 @@ public class TGrafoDirigido implements IGrafoDirigido {
      * Metodo encargado de eliminar una arista dada por un origen y destino. En
      * caso de no existir la adyacencia, retorna falso. En caso de que las
      * etiquetas sean invalidas, retorna falso.
-     *
      */
     public boolean eliminarArista(Comparable nomVerticeOrigen, Comparable nomVerticeDestino) {
         if ((nomVerticeOrigen != null) && (nomVerticeDestino != null)) {
@@ -42,7 +41,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
         return false;
     }
 
-    
+
     /**
      * Metodo encargado de verificar la existencia de una arista. Las etiquetas
      * pasadas por par�metro deben ser v�lidas.
@@ -61,7 +60,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
     /**
      * Metodo encargado de verificar la existencia de un vertice dentro del
      * grafo.-
-     *
+     * <p>
      * La etiqueta especificada como par�metro debe ser v�lida.
      *
      * @param unaEtiqueta Etiqueta del vertice a buscar.-
@@ -74,7 +73,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     /**
      * Metodo encargado de verificar buscar un vertice dentro del grafo.-
-     *
+     * <p>
      * La etiqueta especificada como parametro debe ser valida.
      *
      * @param unaEtiqueta Etiqueta del vertice a buscar.-
@@ -108,7 +107,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     /**
      * Metodo encargado de insertar un vertice en el grafo.
-     *
+     * <p>
      * No pueden ingresarse vertices con la misma etiqueta. La etiqueta
      * especificada como par�metro debe ser v�lida.
      *
@@ -164,9 +163,9 @@ public class TGrafoDirigido implements IGrafoDirigido {
         int n = vertices.size();
         Double[][] dist = obtenerMatrizCostos(vertices);
 
-        for (int k=0; k < n; k++){  //Nodo Intermedio
-            for (int i =0; i < n; i++){ //Nodo Origen
-                for (int j =0; j < n; j++){ //Nodo Destino
+        for (int k = 0; k < n; k++) {  //Nodo Intermedio
+            for (int i = 0; i < n; i++) { //Nodo Origen
+                for (int j = 0; j < n; j++) { //Nodo Destino
                     dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]); //Si es menos lo guardo
                 }
             }
@@ -176,17 +175,17 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
 
     //Clase auxiliar para devolver el camino mas corto y los costos usando FLoyd
-    public class ResultadoCamino{
+    public class ResultadoCamino {
         public List<Comparable> camino;
         public double costo;
 
-        public ResultadoCamino(List<Comparable> camino, double costo){
+        public ResultadoCamino(List<Comparable> camino, double costo) {
             this.camino = camino;
             this.costo = costo;
         }
     }
 
-    public ResultadoCamino floydConRecuperacion(Comparable origen, Comparable destino){
+    public ResultadoCamino floydConRecuperacion(Comparable origen, Comparable destino) {
         int n = vertices.size();
         List<Comparable> etiquetas = new ArrayList<>(vertices.keySet());
         Collections.sort(etiquetas);
@@ -195,9 +194,9 @@ public class TGrafoDirigido implements IGrafoDirigido {
         Integer[][] camino = new Integer[n][n];
 
         //Inicializar matriz camino
-        for (int i = 0; i < n; i++){
-            for  (int j = 0; j < n; j++){
-                if (i == j || dist[i][j] == Double.POSITIVE_INFINITY){
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j || dist[i][j] == Double.POSITIVE_INFINITY) {
                     camino[i][j] = null;
                 } else {
                     camino[i][j] = i;
@@ -224,14 +223,14 @@ public class TGrafoDirigido implements IGrafoDirigido {
         int i = etiquetas.indexOf(origen);
         int j = etiquetas.indexOf(destino);
 
-        if (i == -1 || j == -1 || camino[i][j] == null){
+        if (i == -1 || j == -1 || camino[i][j] == null) {
             return new ResultadoCamino(null, Double.POSITIVE_INFINITY); // no hay vertices o camino valido
         }
 
         //Reconstruimos el camino
         LinkedList<Comparable> resultadoCamino = new LinkedList<>();
         int actual = j;
-        while (actual != i){
+        while (actual != i) {
             resultadoCamino.addFirst(etiquetas.get(actual));
             actual = camino[i][actual];
         }
@@ -241,7 +240,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
 
     public Comparable obtenerExcentricidad(Comparable etiquetaVertice) {
-        Double [][] matrizCostos = floyd();
+        Double[][] matrizCostos = floyd();
 
         List<Comparable> etiquetas = new ArrayList<>(vertices.keySet()); // Obtiene todas las etiquetas de los vértices del grafo y guarda a estas en una lista.
         int indice = etiquetas.indexOf(etiquetaVertice); //Busca el índice de la etiqueta recibida dentro de la lista de etiquetas
@@ -254,7 +253,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
             //Se fija si existe un camino desde indice hasta Double.POSITIVE_INFINITY representa infinito, quiere decir que no hay camino entre esos dos vértices
             if (matrizCostos[indice][j] != Double.POSITIVE_INFINITY) {
-                costoMaximo = Math.max(costoMaximo, matrizCostos[indice][j] );
+                costoMaximo = Math.max(costoMaximo, matrizCostos[indice][j]);
                 //Si hay un camino, costoMaximo se actualiza si ese camino es mas largo que los anteriores
             }
         }
@@ -395,18 +394,18 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     }
 
-    public Collection<TVertice> bpf(){
+    public Collection<TVertice> bpf() {
         Collection<TVertice> visitados = new LinkedList<>();
 
         //Nos aseguramos que todos los vertices no esten visitado
-        for (IVertice v : vertices.values()){
+        for (IVertice v : vertices.values()) {
             v.setVisitado(false);
         }
 
         //Ahora si recorremos todos los vertices una ves desmarcados todos los nodos
-        for (IVertice vertice : vertices.values()){
+        for (IVertice vertice : vertices.values()) {
             TVertice unVertice = (TVertice) vertice;
-            if (!unVertice.getVisitado()){
+            if (!unVertice.getVisitado()) {
                 unVertice.bpf(visitados);
             }
         }
@@ -414,11 +413,11 @@ public class TGrafoDirigido implements IGrafoDirigido {
         return visitados;
     }
 
-    public Collection<TVertice> bpf (TVertice verticeOrigen){
+    public Collection<TVertice> bpf(TVertice verticeOrigen) {
         Collection<TVertice> visitados = new LinkedList<>();
 
         //Nos aseguramos que todos los vertices no esten visitado
-        for (IVertice v : vertices.values()){
+        for (IVertice v : vertices.values()) {
             v.setVisitado(false);
         }
 
@@ -427,7 +426,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
         return visitados;
     }
 
-    public Collection<TVertice> bpf (Comparable etiquetaVertice) {
+    public Collection<TVertice> bpf(Comparable etiquetaVertice) {
         Collection<TVertice> visitados = new LinkedList<>();
 
         /* Accedo directamenete por la clave al vertice que estoy buscando, me evito recorrer todo.
@@ -522,4 +521,44 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
         return orden;
     }
+
+    public List<TVertice> ordenacionTopologica() {
+
+        if (this.tieneCiclo()){
+            return null;
+        }
+
+        List<TVertice> resultado = new LinkedList<>();
+
+        // Desvisitar todos los vértices
+        for (IVertice v : this.vertices.values()) {
+            v.setVisitado(false);
+        }
+
+        // Para cada vértice no visitado, aplicar DFS topológico
+        for (IVertice v : this.vertices.values()) {
+            TVertice vertice = (TVertice) v;
+            if (!vertice.getVisitado()) {
+                dfsTopologico(vertice, resultado);
+            }
+        }
+        return resultado;
+    }
+
+    private void dfsTopologico(TVertice vertice, List<TVertice> resultado) {
+        vertice.setVisitado(true);
+
+        List<IAdyacencia> adyacencias = vertice.getAdyacentes();
+        for (int i = 0; i < adyacencias.size(); i++) {
+            IAdyacencia ady = adyacencias.get(i);
+            Comparable etiquetaDestino = ady.getEtiqueta();
+            TVertice destino = (TVertice) vertices.get(etiquetaDestino);
+            if (!destino.getVisitado()) {
+                dfsTopologico(destino, resultado);
+            }
+        }
+
+        resultado.add(0, vertice); // Agregamos en postorden
+    }
+
 }
