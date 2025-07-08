@@ -1,20 +1,20 @@
 package PDS.UT9;
 
+import PDS.UT9.GeneradorDatosGenericos;
+
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class TClasificador {
-    public static final int METODO_CLASIFICACION_INSERCION = 1;
+    public static final int METODO_CLASIFICACION_INSERCION = 1; //ya esta hecha
     public static final int METODO_CLASIFICACION_SHELL = 2;
-    public static final int METODO_CLASIFICACION_BURBUJA = 3;
+    public static final int METODO_CLASIFICACION_BURBUJA = 3; //ya esta hecha
     public static final int METODO_CLASIFICACION_QUICKSORT = 4;
+    public static final int METODO_CLASIFICACION_HEAPSORT = 5;
 
     public static enum TipoOrden {
         DESCENDIENTE, ASCENDENTE, ALEATORIO
     }
-
-    ;
-
 
     /**
      *
@@ -32,8 +32,10 @@ public class TClasificador {
                 return ordenarPorBurbuja(datosParaClasificar);
             case METODO_CLASIFICACION_QUICKSORT:
                 return ordenarPorQuickSort(datosParaClasificar);
+            case METODO_CLASIFICACION_HEAPSORT:
+                return ordenarPorHeapSort(datosParaClasificar);
             default:
-                // System.err.println("Este codigo no deberia haberse ejecutado");
+                System.err.println("Este codigo no deberia haberse ejecutado");
                 break;
         }
         return datosParaClasificar;
@@ -49,30 +51,45 @@ public class TClasificador {
         int derecha = j;
 
         // TODO:Implementar encuentraPivote a criterio de cada equipo
-        int posicionPivote = 0; //encuentraPivote(izquierda, derecha, entrada);
-        if (posicionPivote >= 0) {
-            int pivote = posicionPivote;
-            while (izquierda <= derecha) {
-                while ((entrada[izquierda] < pivote) && (izquierda < j)) {
-                    izquierda--;
-                }
+        int posicionPivote = encuentraPivote(izquierda, derecha, entrada);
 
-                while ((pivote < entrada[derecha]) && (derecha > i)) {
-                    derecha++;
-                }
-
-                if (izquierda <= derecha) {
-                    intercambiar(entrada, derecha, izquierda);
-                    izquierda++;
-                    derecha--;
-                }
+        while (izquierda <= derecha) {
+            while ((entrada[izquierda] < posicionPivote)) {
+                izquierda++;
             }
 
-            if (i < derecha)
-                quicksort(entrada, i, izquierda);
-            if (izquierda < j)
-                quicksort(entrada, derecha, j);
+            while ((posicionPivote < entrada[derecha])) {
+                derecha--;
+            }
+
+            if (izquierda <= derecha) {
+                intercambiar(entrada, derecha, izquierda);
+                izquierda++;
+                derecha--;
+            }
         }
+
+        if (i < derecha){
+            quicksort(entrada, i, derecha);
+        }
+        if (izquierda < j){
+            quicksort(entrada, izquierda, j);
+        }
+    }
+
+    private int encuentraPivote(int izquierda, int derecha, int[] entrada) {
+
+        int medio = (izquierda + derecha) / 2;
+        if (entrada[izquierda] > entrada[medio]){
+            intercambiar(entrada, izquierda, medio);
+        }
+        if (entrada[izquierda] > entrada[derecha]){
+            intercambiar(entrada, izquierda, derecha);
+        }
+        if (entrada[medio] > entrada[derecha]){
+            intercambiar(entrada, medio, derecha);
+        }
+        return entrada[medio];
     }
 
     private void intercambiar(int[] vector, int pos1, int pos2) {
@@ -86,6 +103,10 @@ public class TClasificador {
      * @return
      */
     private int[] ordenarPorShell(int[] datosParaClasificar) {
+        // Verifico si el array es null
+        if (datosParaClasificar == null) {
+            return null;
+        }
         int j, inc;
         int[] incrementos = new int[]{3223, 358, 51, 10, 3, 1};
 
@@ -97,7 +118,9 @@ public class TClasificador {
                     while (j >= 0) {
                         if (datosParaClasificar[j] > datosParaClasificar[j + inc]) {
                             intercambiar(datosParaClasificar, j, j + inc);
-                            j = j--;
+                            j -= inc;
+                        } else {
+                            break;  // Salgo del while si no hay intercambio
                         }
                     }
                 }
@@ -138,6 +161,47 @@ public class TClasificador {
         }
         return datosParaClasificar;
     }
+
+    protected int[] ordenarPorHeapSort(int[] datosParaClasificar) {
+        if (datosParaClasificar == null) {
+            return null;
+        }
+
+        int n = datosParaClasificar.length;
+
+        // Se construye el heap
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            armaHeap(datosParaClasificar, n, i);
+        }
+
+        // Extrae los elementos del heap uno por uno
+        for (int i = n - 1; i > 0; i--) {
+            intercambiar(datosParaClasificar, 0, i); // Se mueve la raíz al final
+            armaHeap(datosParaClasificar, i, 0);     // Se reajusta el heap
+        }
+
+        return datosParaClasificar;
+    }
+
+    private void armaHeap(int[] datos, int n, int i) {
+        int mayor = i;
+        int izquierda = 2 * i + 1;
+        int derecha = 2 * i + 2;
+
+        if (izquierda < n && datos[izquierda] > datos[mayor]) {
+            mayor = izquierda;
+        }
+
+        if (derecha < n && datos[derecha] > datos[mayor]) {
+            mayor = derecha;
+        }
+
+        if (mayor != i) {
+            intercambiar(datos, i, mayor);
+            armaHeap(datos, n, mayor);
+        }
+    }
+
 
     public double medirTiempo(int tamanioDeDatos, int metodoClasificacion, TipoOrden tipoOrden) {
         GeneradorDatosGenericos gdg = new GeneradorDatosGenericos();
